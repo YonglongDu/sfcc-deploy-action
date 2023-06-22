@@ -32,14 +32,16 @@ async function run() {
                 const srcDirectory = `${src}/cartridges`;
                 archiveCartridges(srcDirectory, archiveFile);
                 sfcc.code.deploy(instance, archiveFile, token, option, (deployerr) => {
-                    if (err) {
+                    if (deployerr) {
                         console.error('Deploy error: %s', deployerr);
+                        core.setFailed(deployerr.message);
                         return;
                     }
 
                     sfcc.code.activate(instance, codeVersion, token, (activateerr) => {
-                        if (err) {
+                        if (activateerr) {
                             console.error('Activate error: %s', activateerr);
+                            core.setFailed(activateerr.message);
                         }
                     });
                 });

@@ -23,7 +23,7 @@ async function run() {
         console.log(`runNumber:${context.runNumber}`);
         console.log(`runId:${context.runId}`);
         console.log(`job:${context.job}`);
-        console.log(`workspace:${process.github.workspace}`);
+        console.log(`workspace:${process.var}`);
 
         console.log(archiveFile);
 

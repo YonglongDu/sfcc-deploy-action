@@ -122510,8 +122510,8 @@ async function run() {
         const clientSecret = core.getInput('client-secret');
         const codeVersion = core.getInput('code-version');
 
-        const src = __dirname;
-        const archiveFile = __nccwpck_require__.ab + "sfcc-deploy-action/" + codeVersion + '.zip';
+        const src = INPUT_PROJECTBASEDIR;
+        const archiveFile = `${src}/${codeVersion}.zip`;
         const option = {};
         console.log(__dirname);
 

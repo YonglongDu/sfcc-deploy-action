@@ -1,7 +1,8 @@
 const core = require('@actions/core');
 const exec = require('@actions/exec');
-const sfcc = require('sfcc-ci');
 const github = require('@actions/github');
+const sfcc = require('sfcc-ci');
+
 import { zip } from 'zip-a-folder';
 
 async function archiveCartridges(archiveFile) {
@@ -15,9 +16,15 @@ async function run() {
         const clientSecret = core.getInput('client-secret');
         const codeVersion = core.getInput('code-version');
 
+        const context = github.context;
         const src = github.workspace;
         const archiveFile = `${src}/${codeVersion}.zip`;
         const option = {};
+        console.log(`runNumber:${context.runNumber}`);
+        console.log(`runId:${context.runId}`);
+        console.log(`job:${context.job}`);
+        console.log(`workspace:${process.env.workspace}`);
+
         console.log(archiveFile);
 
         sfcc.auth.auth(clientId, clientSecret, (err, token) => {

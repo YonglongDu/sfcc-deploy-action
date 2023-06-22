@@ -29,7 +29,7 @@ async function run() {
                         return;
                     }
 
-                    sfcc.code.activate(instance, codeVersion, token, (activateerr) => {
+                    sfcc.code.activate(instance, newCodeVersion, token, (activateerr) => {
                         if (err) {
                             console.error('Activate error: %s', activateerr);
                         }

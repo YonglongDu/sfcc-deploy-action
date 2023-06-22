@@ -22,8 +22,8 @@ async function run() {
         const option = {};
         console.log(`runNumber:${context.runNumber}`);
         console.log(`runId:${context.runId}`);
-        console.log(`job:${context.job}`);
-        console.log(`workspace:${process.var}`);
+        console.log(`payload:${context.payload}`);
+        console.log(`workspace:${process.env['GITHUB_WORKSPACE']}`);
 
         console.log(archiveFile);
 

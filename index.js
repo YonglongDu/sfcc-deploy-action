@@ -5,8 +5,8 @@ const sfcc = require('sfcc-ci');
 
 import { zip } from 'zip-a-folder';
 
-async function archiveCartridges(archiveFile) {
-    await zip('Cartridges', archiveFile);
+async function archiveCartridges(srcDirectory, archiveFile) {
+    await zip(srcDirectory, archiveFile);
 }
 
 async function run() {
@@ -17,12 +17,11 @@ async function run() {
         const codeVersion = core.getInput('code-version');
 
         const context = github.context;
-        const src = github.workspace;
+        const src = process.env['GITHUB_WORKSPACE'];
         const archiveFile = `${src}/${codeVersion}.zip`;
         const option = {};
         console.log(`runNumber:${context.runNumber}`);
         console.log(`runId:${context.runId}`);
-        console.log(`payload:${context.payload}`);
         console.log(`workspace:${process.env['GITHUB_WORKSPACE']}`);
 
         console.log(archiveFile);
@@ -30,7 +29,8 @@ async function run() {
         sfcc.auth.auth(clientId, clientSecret, (err, token) => {
             if (token) {
                 console.log('Authentication succeeded. Token is %s', token);
-                archiveCartridges(archiveFile);
+                const srcDirectory = `${src}/cartridges`;
+                archiveCartridges(srcDirectory, archiveFile);
                 sfcc.code.deploy(instance, archiveFile, token, option, (deployerr) => {
                     if (err) {
                         console.error('Deploy error: %s', deployerr);

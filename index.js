@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const exec = require('@actions/exec');
 const sfcc = require('sfcc-ci');
+const github = require('@actions/github');
 import { zip } from 'zip-a-folder';
 
 async function archiveCartridges(archiveFile) {
@@ -14,7 +15,8 @@ async function run() {
         const clientSecret = core.getInput('client-secret');
         const codeVersion = core.getInput('code-version');
 
-        const src = INPUT_PROJECTBASEDIR;
+        const context = github.context;
+        const src = context.workspace;
         const archiveFile = `${src}/${codeVersion}.zip`;
         const option = {};
         console.log(__dirname);

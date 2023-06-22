@@ -1,0 +1,31 @@
+---
+name: SFCC Deploy Action
+author: Yonglong Du
+description: Deploy cartridges to Salesforce Commerce Cloud sandbox or PIG
+inputs:
+    instance:
+        description: 'instance'
+        required: true
+        default: '.dx.commercecloud.salesforce.com'
+    client-id:
+        description: 'API client id'
+        required: true
+        default: ''
+    client-secret:
+        description: 'API client secret'
+        required: true
+        default: ''
+    code-version-prefix:
+        description: 'code version prefix'
+        required: true
+        default: ''
+    auto-increase-version:
+        description: 'auto increase version'
+        required: true
+        default: ''
+outputs:
+    new-version:
+        description: 'new version'
+runs:
+    using: node16
+    main: action/index.js

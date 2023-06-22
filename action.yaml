@@ -15,12 +15,8 @@ inputs:
         description: 'API client secret'
         required: true
         default: ''
-    code-version-prefix:
-        description: 'code version prefix'
-        required: true
-        default: ''
-    auto-increase-version:
-        description: 'auto increase version'
+    code-version:
+        description: 'code version'
         required: true
         default: ''
 outputs:

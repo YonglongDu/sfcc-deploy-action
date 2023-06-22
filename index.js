@@ -12,11 +12,10 @@ async function run() {
         const instance = core.getInput('instance');
         const clientId = core.getInput('client-id');
         const clientSecret = core.getInput('client-secret');
-        const codeVersionPrefix = core.getInput('code-version-prefix');
+        const codeVersion = core.getInput('code-version');
 
-        //const src = __dirname;
-        const newCodeVersion = `${codeVersionPrefix}_`;
-        const archiveFile = `${newCodeVersion}.zip`;
+        const src = __dirname;
+        const archiveFile = `${src}/${codeVersion}.zip`;
         const option = {};
 
         sfcc.auth.auth(clientId, clientSecret, (err, token) => {
@@ -29,7 +28,7 @@ async function run() {
                         return;
                     }
 
-                    sfcc.code.activate(instance, newCodeVersion, token, (activateerr) => {
+                    sfcc.code.activate(instance, codeVersion, token, (activateerr) => {
                         if (err) {
                             console.error('Activate error: %s', activateerr);
                         }

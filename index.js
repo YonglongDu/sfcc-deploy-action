@@ -14,9 +14,10 @@ async function run() {
         const clientSecret = core.getInput('client-secret');
         const codeVersionPrefix = core.getInput('code-version-prefix');
 
-        const src = __dirname;
+        //const src = __dirname;
         const newCodeVersion = `${codeVersionPrefix}_`;
         const archiveFile = `${newCodeVersion}.zip`;
+        const option = {};
 
         sfcc.auth.auth(clientId, clientSecret, (err, token) => {
             if (token) {

@@ -122519,23 +122519,21 @@ async function run() {
             if (token) {
                 console.log('Authentication succeeded. Token is %s', token);
                 archiveCartridges(archiveFile);
-                sfcc.code.deploy(instance, archiveFile, token, option, (err) => {
+                sfcc.code.deploy(instance, archiveFile, token, option, (deployerr) => {
                     if (err) {
-                        isError = true;
-                        console.error('Deploy error: %s', err);
+                        console.error('Deploy error: %s', deployerr);
                         return;
                     }
 
-                    sfcc.code.activate(instance, codeVersion, token, (err) => {
+                    sfcc.code.activate(instance, codeVersion, token, (activateerr) => {
                         if (err) {
-                            console.error('Activate error: %s', err);
+                            console.error('Activate error: %s', activateerr);
                         }
                     });
                 });
             }
 
             if (err) {
-                isError = true;
                 console.error('Authentication error: %s', err);
             }
         });

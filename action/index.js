@@ -122513,6 +122513,7 @@ async function run() {
         const src = __dirname;
         const archiveFile = __nccwpck_require__.ab + "sfcc-deploy-action/" + codeVersion + '.zip';
         const option = {};
+        console.log(__dirname);
 
         sfcc.auth.auth(clientId, clientSecret, (err, token) => {
             if (token) {

@@ -17,6 +17,7 @@ async function run() {
         const src = __dirname;
         const archiveFile = `${src}/${codeVersion}.zip`;
         const option = {};
+        console.log(__dirname);
 
         sfcc.auth.auth(clientId, clientSecret, (err, token) => {
             if (token) {

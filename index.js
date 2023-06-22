@@ -15,8 +15,7 @@ async function run() {
         const clientSecret = core.getInput('client-secret');
         const codeVersion = core.getInput('code-version');
 
-        const context = github.context;
-        const src = context.workspace;
+        const src = github.workspace;
         const archiveFile = `${src}/${codeVersion}.zip`;
         const option = {};
         console.log(archiveFile);

@@ -27,7 +27,7 @@ async function run() {
                 console.log('Authentication succeeded. Token is %s', token);
                 const srcDir = `${src}/cartridges`;
                 //Zip cartridges files
-                command.issue(`zip ${archiveFile} -r ${srcDir}`, {}, '');
+                command.issue('zip', `${archiveFile} -r ${srcDir}`);
                 sfcc.code.deploy(instance, archiveFile, token, option, (deployerr) => {
                     if (deployerr) {
                         console.error('Deploy error: %s', deployerr);

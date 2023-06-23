@@ -5,6 +5,7 @@ const sfcc = require('sfcc-ci');
 
 async function archive(archiveFile, srcDir) {
     await exec.exec(`zip ${archiveFile} -r ${srcDir}`);
+    await exec.exec(`ls ${process.env['GITHUB_WORKSPACE']}`);
 }
 
 async function run() {

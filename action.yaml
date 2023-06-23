@@ -26,8 +26,9 @@ outputs:
 runs:
     using: 'composite'
     steps:
-        - run: echo ${{ archive }}
-              zip ${{ archive }} -r ${{ github.workspace }}/cartridges
+        - run: echo $archive
+              zip $archive -r $src_dir
           env:
+              src_dir: ${{ github.workspace }}/cartridges
               archive: ${{ inputs.code-version }}_${{ github.run_number }}.zip
           shell: bash

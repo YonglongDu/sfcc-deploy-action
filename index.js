@@ -4,12 +4,6 @@ const exec = require('@actions/exec');
 const github = require('@actions/github');
 const sfcc = require('sfcc-ci');
 
-import { zip } from 'zip-a-folder';
-
-async function archiveCartridges(srcDirectory, archiveFile) {
-    await zip(srcDirectory, archiveFile);
-}
-
 async function run() {
     try {
         const instance = core.getInput('instance');

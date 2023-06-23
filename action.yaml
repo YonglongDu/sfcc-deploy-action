@@ -28,5 +28,5 @@ runs:
     steps:
         - run: echo ${{ github.workspace }}
           shell: bash
-        - run: echo ${{ input.code-version }}_${{ vars.GITHUB_RUN_NUMBER }}
+        - run: echo ${{ inputs.code-version }}_${{ vars.GITHUB_RUN_NUMBER }}
           shell: bash

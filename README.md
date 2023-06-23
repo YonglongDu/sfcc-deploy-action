@@ -23,5 +23,5 @@ In order to deploy your code to sandbox, you need to [grant your API key access 
         instance: ${{ secrets.SFCC_SANDBOX_API_HOST }}
         client-id: ${{ secrets.SFCC_OAUTH_CLIENT_ID }}
         client-secret: ${{ secrets.SFCC_OAUTH_CLIENT_SECRET }}
-        code-version: your-code-version-prefix
+        code-version: action-test_${{github.run_number}}
 ```

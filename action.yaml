@@ -19,10 +19,6 @@ inputs:
         description: 'code version'
         required: true
         default: ''
-outputs:
-    new-version:
-        description: 'new version'
-
 runs:
     using: node16
     main: action/index.js

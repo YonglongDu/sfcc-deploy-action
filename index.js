@@ -12,7 +12,8 @@ async function run() {
 
         const context = github.context;
         const src = process.env['GITHUB_WORKSPACE'];
-        const archiveFile = `${src}/${codeVersion}_${context.runNumber}.zip`;
+        const newCodeVersion = `${codeVersion}_${context.runNumber}`;
+        const archiveFile = `${src}/${newCodeVersion}.zip`;
         const option = {};
         console.log(`runNumber:${context.runNumber}`);
         console.log(`runId:${context.runId}`);
@@ -27,7 +28,8 @@ async function run() {
                 const srcDir = `${src}/cartridges`;
 
                 //Zip cartridges files
-                await exec.exec(`zip ${archiveFile} -r ${srcDir}`);
+                await exec.exec(`cp -r ${srcDir} ${newCodeVersion}`);
+                await exec.exec(`zip ${archiveFile} -r ${newCodeVersion}`);
                 await exec.exec(`ls ${process.env['GITHUB_WORKSPACE']}`);
 
                 sfcc.code.deploy(instance, archiveFile, token, option, (deployerr) => {

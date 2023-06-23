@@ -1,6 +1,5 @@
 const core = require('@actions/core');
 const exec = require('@actions/exec');
-const github = require('@actions/github');
 const sfcc = require('sfcc-ci');
 
 async function run() {
@@ -10,9 +9,8 @@ async function run() {
         const clientSecret = core.getInput('client-secret');
         const codeVersion = core.getInput('code-version');
 
-        const context = github.context;
         const src = process.env['GITHUB_WORKSPACE'];
-        const newCodeVersion = `${codeVersion}_${context.runNumber}`;
+        const newCodeVersion = codeVersion;
         const archiveFile = `${src}/${newCodeVersion}.zip`;
         const option = {};
         console.log(`workspace:${process.env['GITHUB_WORKSPACE']}`);

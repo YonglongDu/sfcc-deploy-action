@@ -4,7 +4,7 @@ The Github action helps you deploy your SFCC code into Salesforce Commerce Cloud
 
 ## Usage
 
-### Add following secrets in your respository
+### Add following secrets in your repository
 
 Refer [Add an API Client](https://documentation.b2c.commercecloud.salesforce.com/DOC2/topic/com.demandware.dochelp/content/b2c_commerce/topics/account_manager/b2c_account_manager_add_api_client_id.html) section for further details about how to get below informations.
 

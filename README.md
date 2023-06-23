@@ -12,7 +12,7 @@ Refer [Add an API Client](https://documentation.b2c.commercecloud.salesforce.com
 -   `SFCC_OAUTH_CLIENT_ID` client id used for authentication
 -   `SFCC_OAUTH_CLIENT_SECRET` client secret used for authentication
 
-In order to deploy your code to sandbox, you need to [grant your API key access to your instance](https://github.com/SalesforceCommerceCloud/sfcc-ci#grant-your-api-key-access-to-your-instances) first.
+### In order to deploy your code to sandbox, you need to [grant your API key access to your instance](https://github.com/SalesforceCommerceCloud/sfcc-ci#grant-your-api-key-access-to-your-instances) first
 
 ### Deploy your cartridges with this Github action
 

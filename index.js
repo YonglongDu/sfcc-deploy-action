@@ -30,6 +30,7 @@ async function run() {
             if (token) {
                 console.log('Authentication succeeded. Token is %s', token);
                 const srcDirectory = `${src}/cartridges`;
+                console.log();
                 archiveCartridges(srcDirectory, archiveFile);
                 sfcc.code.deploy(instance, archiveFile, token, option, (deployerr) => {
                     if (deployerr) {

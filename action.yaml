@@ -22,6 +22,11 @@ inputs:
 outputs:
     new-version:
         description: 'new version'
+        value: ''
 runs:
-    using: node16
-    main: action/index.js
+    using: 'composite'
+    steps:
+        - run: echo ${{ github.workspace }}
+          shell: bash
+        - run: echo ${{ input.code-version }}_${{ vars.GITHUB_RUN_NUMBER }}
+          shell: bash

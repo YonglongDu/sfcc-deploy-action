@@ -33,6 +33,7 @@ runs:
               export SFCC_SANDBOX_API_HOST=${{ inputs.instance }}
               export API_KEY=${{ inputs.client-id }}
               export API_SECRET=${{ inputs.client-secret }}
+              npm install
               sfcc-ci client:auth $API_KEY $API_SECRET
               sfcc-ci code:deploy $archive -i $SFCC_SANDBOX_API_HOST
               sfcc-ci code:activate <code_version> -i $SFCC_SANDBOX_API_HOST

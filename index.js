@@ -3,11 +3,6 @@ const exec = require('@actions/exec');
 const github = require('@actions/github');
 const sfcc = require('sfcc-ci');
 
-async function archive(archiveFile, srcDir) {
-    await exec.exec(`zip ${archiveFile} -r ${srcDir}`);
-    await exec.exec(`ls ${process.env['GITHUB_WORKSPACE']}`);
-}
-
 async function run() {
     try {
         const instance = core.getInput('instance');
@@ -17,7 +12,7 @@ async function run() {
 
         const context = github.context;
         const src = process.env['GITHUB_WORKSPACE'];
-        const archiveFile = `${src}/${codeVersion}.zip`;
+        const archiveFile = `${src}/${codeVersion}_${context.runNumber}.zip`;
         const option = {};
         console.log(`runNumber:${context.runNumber}`);
         console.log(`runId:${context.runId}`);
@@ -26,12 +21,16 @@ async function run() {
         console.log(archiveFile);
 
         //Authorization Server
-        sfcc.auth.auth(clientId, clientSecret, (err, token) => {
+        sfcc.auth.auth(clientId, clientSecret, async (err, token) => {
             if (token) {
                 console.log('Authentication succeeded. Token is %s', token);
                 const srcDir = `${src}/cartridges`;
+
                 //Zip cartridges files
-                archive(archiveFile, srcDir);
+                await exec.exec(`zip ${archiveFile} -r ${srcDir}`);
+                await exec.exec(`ls ${process.env['GITHUB_WORKSPACE']}`);
+                console.log(ret);
+
                 sfcc.code.deploy(instance, archiveFile, token, option, (deployerr) => {
                     if (deployerr) {
                         console.error('Deploy error: %s', deployerr);

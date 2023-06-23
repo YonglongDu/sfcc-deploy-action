@@ -15,11 +15,8 @@ async function run() {
         const newCodeVersion = `${codeVersion}_${context.runNumber}`;
         const archiveFile = `${src}/${newCodeVersion}.zip`;
         const option = {};
-        console.log(`runNumber:${context.runNumber}`);
-        console.log(`runId:${context.runId}`);
         console.log(`workspace:${process.env['GITHUB_WORKSPACE']}`);
-
-        console.log(archiveFile);
+        console.log(`archiveFile:${archiveFile}`);
 
         //Authorization Server
         sfcc.auth.auth(clientId, clientSecret, async (err, token) => {
@@ -30,21 +27,24 @@ async function run() {
                 //Zip cartridges files
                 await exec.exec(`cp -r ${srcDir} ${newCodeVersion}`);
                 await exec.exec(`zip ${archiveFile} -r ${newCodeVersion}`);
-                await exec.exec(`ls ${process.env['GITHUB_WORKSPACE']}`);
 
-                sfcc.code.deploy(instance, archiveFile, token, option, (deployerr) => {
+                sfcc.code.deploy(instance, archiveFile, token, option, async (deployerr) => {
                     if (deployerr) {
                         console.error('Deploy error: %s', deployerr);
                         core.setFailed(deployerr.message);
                         return;
                     }
 
-                    sfcc.code.activate(instance, codeVersion, token, (activateerr) => {
+                    sfcc.code.activate(instance, newCodeVersion, token, (activateerr) => {
                         if (activateerr) {
                             console.error('Activate error: %s', activateerr);
                             core.setFailed(activateerr.message);
                         }
                     });
+
+                    //Remove the temporary source directory and archive file for deployment
+                    await exec.exec(`rm -r ${newCodeVersion}`);
+                    await exec.exec(`rm ${archiveFile}`);
                 });
             }
 

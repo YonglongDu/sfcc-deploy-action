@@ -29,7 +29,6 @@ async function run() {
                 //Zip cartridges files
                 await exec.exec(`zip ${archiveFile} -r ${srcDir}`);
                 await exec.exec(`ls ${process.env['GITHUB_WORKSPACE']}`);
-                console.log(ret);
 
                 sfcc.code.deploy(instance, archiveFile, token, option, (deployerr) => {
                     if (deployerr) {

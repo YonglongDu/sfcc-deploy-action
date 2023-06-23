@@ -30,6 +30,7 @@ runs:
               echo $archive
               echo $src_dir
               zip $archive -r $src_dir
+              ls ${{ github.workspace }}
           env:
               src_dir: ${{ github.workspace }}/cartridges
               archive: ${{ inputs.code-version }}_${{ github.run_number }}.zip

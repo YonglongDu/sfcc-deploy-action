@@ -22,24 +22,7 @@ inputs:
 outputs:
     new-version:
         description: 'new version'
-        value: ''
+
 runs:
-    using: 'composite'
-    steps:
-        - run: |
-              echo $archive
-              echo $src_dir
-              zip $archive -r $src_dir
-              export SFCC_SANDBOX_API_HOST=${{ inputs.instance }}
-              export API_KEY=${{ inputs.client-id }}
-              export API_SECRET=${{ inputs.client-secret }}
-              npm install
-              sfcc-ci client:auth $API_KEY $API_SECRET
-              sfcc-ci code:deploy $archive -i $SFCC_SANDBOX_API_HOST
-              sfcc-ci code:activate <code_version> -i $SFCC_SANDBOX_API_HOST
-              sfcc-ci auth:logout
-          env:
-              src_dir: ${{ github.workspace }}/cartridges
-              new_version: ${{ inputs.code-version }}_${{ github.run_number }}
-              archive: ${{ inputs.code-version }}_${{ github.run_number }}.zip
-          shell: bash
+    using: 'node16'
+    main: 'index.js'

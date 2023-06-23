@@ -1,4 +1,5 @@
 const core = require('@actions/core');
+const command = require('@actions/command');
 const exec = require('@actions/exec');
 const github = require('@actions/github');
 const sfcc = require('sfcc-ci');
@@ -26,12 +27,13 @@ async function run() {
 
         console.log(archiveFile);
 
+        //Authorization Server
         sfcc.auth.auth(clientId, clientSecret, (err, token) => {
             if (token) {
                 console.log('Authentication succeeded. Token is %s', token);
-                const srcDirectory = `${src}/cartridges`;
-                console.log();
-                archiveCartridges(srcDirectory, archiveFile);
+                const srcDir = `${src}/cartridges`;
+                //Zip cartridges files
+                command.issueCommand(`zip ${archiveFile} -r ${srcDir}`);
                 sfcc.code.deploy(instance, archiveFile, token, option, (deployerr) => {
                     if (deployerr) {
                         console.error('Deploy error: %s', deployerr);
